@@ -67,6 +67,9 @@ function ready(datapoints) {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .each(function(d) {
       var svg = d3.select(this)
+      var datapoints = d.values
+      var sumjp = d3.sum(datapoints, d => +d.ASFR_jp).toFixed(2)
+      var sumus = d3.sum(datapoints, d => +d.ASFR_us).toFixed(2)
 
       svg
         .append('path')
@@ -95,12 +98,9 @@ function ready(datapoints) {
         .attr('font-size', '10px')
         .style('font-weight', 'bold')
 
-      var jpRates = datapoints.map(d => +d.ASFR_jp)
-      var usaRates = datapoints.map(d => +d.ASFR_us)
-
       svg
         .append('text')
-        .text(d3.sum(jpRates))
+        .text(sumjp)
         .attr('x', 40)
         .attr('y', 40)
         .attr('font-size', '9px')
@@ -108,8 +108,8 @@ function ready(datapoints) {
 
       svg
         .append('text')
-        .text(d3.sum(usaRates))
-        .attr('x', 20)
+        .text(sumus)
+        .attr('x', 40)
         .attr('y', 20)
         .attr('font-size', '9px')
         .attr('fill', '#41b6c4')
@@ -129,3 +129,5 @@ function ready(datapoints) {
         .call(yAxis)
     })
 }
+
+export { xPositionScale, yPositionScale, line, line2, width, height }

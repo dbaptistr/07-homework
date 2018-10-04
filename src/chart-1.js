@@ -16,7 +16,7 @@ var svg = d3
   .attr('transform', `translate(${margin.left},${margin.top})`)
 
 // Create a time parser (see hints)
-var parseTime = d3.timeParse('%B-%y')
+let parseTime = d3.timeParse('%B-%y')
 
 // Create your scales
 var xPositionScale = d3.scaleLinear().range([0, width])
@@ -148,4 +148,14 @@ function ready(datapoints) {
     .append('g')
     .attr('class', 'axis y-axis')
     .call(yAxis)
+}
+
+export {
+  xPositionScale,
+  yPositionScale,
+  colorScale,
+  line,
+  width,
+  height,
+  parseTime
 }
